@@ -2,8 +2,6 @@ import Detailcontent from "@/app/components/detailcontent";
 import React from "react";
 import { doc, getDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 type DetailcontentProps = {
   params: Promise<{ id: string }>;
