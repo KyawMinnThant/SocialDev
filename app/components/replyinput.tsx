@@ -50,13 +50,16 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ postId, commentId }) => {
   };
 
   return (
-    <form onSubmit={handleReplySubmit} className="mt-2 flex gap-2">
+    <form
+      onSubmit={handleReplySubmit}
+      className="mt-2 flex flex-wrap gap-2 overflow-x-hidden"
+    >
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Write a reply..."
-        className="flex-1 border px-3 py-1 rounded"
+        className=" w-[80%] border px-3 py-1 rounded"
       />
 
       <button

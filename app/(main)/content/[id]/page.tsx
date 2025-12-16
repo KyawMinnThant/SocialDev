@@ -30,7 +30,7 @@ const ContentWithId: React.FC<DetailcontentProps> = async ({ params }) => {
   };
 
   return (
-    <div>
+    <div className=" overflow-hidden">
       <Detailcontent content={contentData} />
     </div>
   );

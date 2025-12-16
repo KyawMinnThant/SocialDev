@@ -22,6 +22,7 @@ import { db } from "@/firebaseConfig";
 
 import Replybox from "./replybox";
 import Replyinput from "./replyinput";
+import { useAuthStore } from "../store/useAuthStore";
 
 const Commentbox = ({ comment }: { comment: any }) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
@@ -33,6 +34,7 @@ const Commentbox = ({ comment }: { comment: any }) => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { user } = useAuthStore();
 
   useEffect(() => {
     const q = query(
@@ -123,7 +125,7 @@ const Commentbox = ({ comment }: { comment: any }) => {
   };
 
   return (
-    <div className=" mx-auto px-2 sm:px-0">
+    <div className=" mx-auto px-2 sm:px-0 overflow-x-hidden">
       {/* Main comment container */}
       <article className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-5 bg-white rounded-xl shadow-md border border-gray-100">
         {/* User image */}
@@ -195,7 +197,7 @@ const Commentbox = ({ comment }: { comment: any }) => {
           {/* Comment text or edit box */}
           <section className="mt-2">
             {isEditing ? (
-              <>
+              <div className="flex flex-col gap-3">
                 <textarea
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
@@ -217,7 +219,7 @@ const Commentbox = ({ comment }: { comment: any }) => {
                     Cancel
                   </button>
                 </div>
-              </>
+              </div>
             ) : (
               <p className="text-gray-700 whitespace-pre-wrap break-words leading-relaxed">
                 {comment.text}
@@ -226,19 +228,23 @@ const Commentbox = ({ comment }: { comment: any }) => {
           </section>
 
           {/* Reply button */}
-          <footer className="mt-4">
-            <button
-              onClick={() => setShowReplyInput((prev) => !prev)}
-              className="inline-flex items-center gap-2 text-indigo-600 font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            >
-              <FiCornerUpLeft className="text-lg" />
-              Reply
-            </button>
-          </footer>
+          {!user ? (
+            ""
+          ) : (
+            <footer className="mt-4">
+              <button
+                onClick={() => setShowReplyInput((prev) => !prev)}
+                className="inline-flex items-center gap-2 text-indigo-600 font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                <FiCornerUpLeft className="text-lg" />
+                Reply
+              </button>
+            </footer>
+          )}
 
           {/* Reply input form */}
           {showReplyInput && (
-            <div className="mt-4">
+            <div className="mt-4 overflow-x-hidden">
               <Replyinput commentId={comment.id} postId={comment.postId} />
             </div>
           )}

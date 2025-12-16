@@ -224,7 +224,7 @@ const Detailcontent = ({ content }: any) => {
   };
 
   return (
-    <main className="mt-[90px] font-mono max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="mt-[90px] overflow-x-hidden font-mono max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Back Link */}
       <Link
         href="/"
