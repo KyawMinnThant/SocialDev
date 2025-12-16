@@ -50,7 +50,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col p-4 space-y-2 w-48">
+    <div className="flex flex-col p-4 space-y-2 w-full">
       <Link
         href="/"
         className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
@@ -59,41 +59,47 @@ const Sidebar = () => {
         <span>Home</span>
       </Link>
 
-      <Link
-        href="/profile"
-        className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
-      >
-        <FiUser size={18} />
-        <span>Profile</span>
-      </Link>
-
-      <Link
-        href="/createcontent"
-        className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
-      >
-        <IoCreateOutline size={18} />
-        <span>Create Post</span>
-      </Link>
-
-      <Link
-        href="/bookmark"
-        className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
-      >
-        <IoBookmarkOutline size={18} />
-        <span>Bookmarks</span>
-      </Link>
-
       {/* Conditional rendering for Login/Logout */}
       {!user || !cookieValid ? (
-        ""
+        <p className=" w-[90%] text-gray-600 mx-2">
+          To post content and bookmark content, you must login first. Login
+          users can view their bookmark posts, view their profile and create the
+          new posts as well as commenting on post and replying to comments
+        </p>
       ) : (
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 text-red-600 hover:text-red-800 rounded px-3 py-2 transition text-left"
-        >
-          <FiLogOut size={18} />
-          <span>Logout</span>
-        </button>
+        <div>
+          <Link
+            href="/profile"
+            className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
+          >
+            <FiUser size={18} />
+            <span>Profile</span>
+          </Link>
+
+          <Link
+            href="/createcontent"
+            className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
+          >
+            <IoCreateOutline size={18} />
+            <span>Create Post</span>
+          </Link>
+
+          <Link
+            href="/bookmark"
+            className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
+          >
+            <IoBookmarkOutline size={18} />
+            <span>Bookmarks</span>
+          </Link>
+
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 text-red-600 hover:text-red-800 rounded px-3 py-2 transition text-left"
+          >
+            <FiLogOut size={18} />
+            <span>Logout</span>
+          </button>
+        </div>
       )}
     </div>
   );
