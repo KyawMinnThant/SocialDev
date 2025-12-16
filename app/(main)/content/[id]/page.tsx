@@ -10,13 +10,6 @@ type DetailcontentProps = {
 };
 
 const ContentWithId: React.FC<DetailcontentProps> = async ({ params }) => {
-  const cookiesToken = await cookies();
-  const token = cookiesToken.get("user_token");
-
-  // If token exists, redirect to /anime
-  if (!token) {
-    redirect("/");
-  }
   const { id } = await params;
 
   const docRef = doc(db, "posts", id);
