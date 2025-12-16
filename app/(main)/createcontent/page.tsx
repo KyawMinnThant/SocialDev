@@ -2,8 +2,17 @@ import React from "react";
 import Createcontentform from "../../components/createcontentform";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const CreateContent = () => {
+const CreateContent = async () => {
+  const cookiesToken = await cookies();
+  const token = cookiesToken.get("user_token");
+
+  // If token exists, redirect to /anime
+  if (!token) {
+    redirect("/");
+  }
   return (
     <div className=" mt-[90px] ml-[60px]">
       <Link
