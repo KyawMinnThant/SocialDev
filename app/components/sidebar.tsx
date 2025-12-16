@@ -6,7 +6,7 @@ import { FiHome, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
 import { auth } from "@/firebaseConfig"; // Adjust path if needed
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { clearAuthCookie } from "../lib/setAuthCookies";
-import { IoIosLogIn } from "react-icons/io";
+import { IoBookmarkOutline, IoCreateOutline } from "react-icons/io5";
 
 const Sidebar = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -67,13 +67,21 @@ const Sidebar = () => {
         <span>Profile</span>
       </Link>
 
-      <a
-        href="#"
+      <Link
+        href="/createcontent"
         className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
       >
-        <FiSettings size={18} />
-        <span>Settings</span>
-      </a>
+        <IoCreateOutline size={18} />
+        <span>Create Post</span>
+      </Link>
+
+      <Link
+        href="/bookmark"
+        className="flex items-center gap-3 hover:bg-gray-200 rounded px-3 py-2 transition"
+      >
+        <IoBookmarkOutline size={18} />
+        <span>Bookmarks</span>
+      </Link>
 
       {/* Conditional rendering for Login/Logout */}
       {!user || !cookieValid ? (
